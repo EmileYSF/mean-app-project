@@ -1,0 +1,9 @@
+<mat-grid-list cols="4" rowHeight="1:1" *ngIf="products.length > 0">
+  <mat-grid-tile *ngFor="let product of products">
+    <mat-grid-tile-header>
+      {{ product.title }}
+    </mat-grid-tile-header>
+    {{ product.description }}
+  </mat-grid-tile>
+</mat-grid-list>
+<p class="info-text mat-body-1" *ngIf="products.length <= 0">No products added yet!</p>

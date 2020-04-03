@@ -1,0 +1,31 @@
+<mat-card>
+  <form (submit)="onRegisterProduct(productForm)" #productForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        placeholder="Product title"
+        required
+        #title="ngModel">
+       <mat-error *ngIf="title.invalid">Enter a title</mat-error>
+      </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="6"
+        name="description"
+        ngModel
+        placeholder="Describe your product"
+        required
+        #description="ngModel"></textarea>
+      <mat-error *ngIf="description.invalid">Enter a description</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit">Register product</button>
+  </form>
+</mat-card>
+
