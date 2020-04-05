@@ -11,15 +11,22 @@ import { ProductsService } from '../products.service';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
-  private productsSubscription : Subscription;
+  isLoading = false;
+  private productsSubscription: Subscription;
 
   constructor(public productsService: ProductsService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.productsService.getProducts();
     this.productsSubscription = this.productsService.getProductUpdatedListener().subscribe((products: Product[]) => {
+      this.isLoading = false;
       this.products = products;
     });
+  }
+
+  onDelete(productId: string): void {
+    this.productsService.deleteProduct(productId);
   }
 
   ngOnDestroy(): void {

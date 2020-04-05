@@ -1,11 +1,12 @@
 <mat-card>
-  <form (submit)="onRegisterProduct(productForm)" #productForm="ngForm">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onRegisterProduct(productForm)" #productForm="ngForm" *ngIf="!isLoading">
     <mat-form-field>
       <input
         matInput
         type="text"
         name="title"
-        ngModel
+        [ngModel]="product?.title"
         placeholder="Product title"
         required
         #title="ngModel">
@@ -16,7 +17,7 @@
         matInput
         rows="6"
         name="description"
-        ngModel
+        [ngModel]="product?.description"
         placeholder="Describe your product"
         required
         #description="ngModel"></textarea>
