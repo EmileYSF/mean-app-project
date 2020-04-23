@@ -1,32 +1,37 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (submit)="onRegisterProduct(productForm)" #productForm="ngForm" *ngIf="!isLoading">
+  <form [formGroup]="form" (submit)="onRegisterProduct()" *ngIf="!isLoading">
     <mat-form-field>
       <input
         matInput
         type="text"
-        name="title"
-        [ngModel]="product?.title"
+        formControlName="title"
         placeholder="Product title"
-        required
-        #title="ngModel">
-       <mat-error *ngIf="title.invalid">Enter a title</mat-error>
-      </mat-form-field>
+      />
+      <mat-error *ngIf="form.get('title').invalid">Enter a title</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="productImage.click()">
+        Pick product image
+      </button>
+      <input type="file" #productImage (change)="onImageUpload($event)"/>
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" [alt]="form.value.title">
+    </div>
     <mat-form-field>
       <textarea
         matInput
         rows="6"
-        name="description"
-        [ngModel]="product?.description"
+        formControlName="description"
         placeholder="Describe your product"
-        required
-        #description="ngModel"></textarea>
-      <mat-error *ngIf="description.invalid">Enter a description</mat-error>
+      ></textarea>
+      <mat-error *ngIf="form.get('description').invalid"
+        >Enter a description</mat-error
+      >
     </mat-form-field>
-    <button
-      mat-raised-button
-      color="accent"
-      type="submit">Register product</button>
+    <button mat-raised-button color="accent" type="submit">
+      Register product
+    </button>
   </form>
 </mat-card>
-

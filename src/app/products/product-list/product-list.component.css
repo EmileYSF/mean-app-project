@@ -8,6 +8,14 @@
   text-align: center;
 }
 
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
 .product-deck-container {
   display: flex;
   flex-flow: row wrap;
@@ -42,8 +50,4 @@
 
 button {
   float: right;
-}
-
-mat-spinner {
-  margin: auto;
 }

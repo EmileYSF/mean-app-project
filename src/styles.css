@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #fafafa;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.snackBarError {
+    color: #f44336;
+    text-align: center;
+}
+
+.snackBarError span {
+    margin: auto;
+}
+
+.mat-snack-bar-container {
+    min-width: 100px !important;
+}
