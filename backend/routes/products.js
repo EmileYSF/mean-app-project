@@ -49,6 +49,7 @@ router.post(
       imagePath: url + "/images/" + req.file.filename,
       user_id: userId,
     };
+
     db.collection("products")
       .insertOne(product)
       .then((createdProduct) => {
@@ -85,7 +86,7 @@ router.put(
     db.collection("products")
       .updateOne({ _id: id, user_id: userId }, { $set: product })
       .then((updatedProduct) => {
-        if (updatedProduct.modifiedCount) {
+        if (updatedProduct.result.n > 0) {
           res.status(200).json({
             message: "Product updated successfully",
           });

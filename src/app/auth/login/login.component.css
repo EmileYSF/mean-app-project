@@ -3,5 +3,6 @@ mat-form-field {
 }
 
 mat-spinner {
+  zoom: 0.3;
   margin: auto;
 }

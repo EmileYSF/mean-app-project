@@ -45,9 +45,9 @@ mat-paginator {
 }
 
 .product-action-bar {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 button {
-  float: right;
+  /* float: right; */
 }

@@ -1,13 +1,63 @@
-mat-form-field, textarea {
-  width: 100%;
+mat-spinner {
+  zoom: 0.3;
+  margin: 1rem auto;
 }
 
-mat-spinner {
-  margin: auto;
+mat-card {
+  overflow: hidden;
 }
 
 input[type="file"] {
-  visibility: hidden;
+  display: none;
+}
+
+.head-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.title-form-field {
+  min-width: 25ch;
+  max-width: 50ch;
+  flex: 1;
+}
+.title-form-field input {
+  max-width: 100%;
+}
+.price-form-field {
+  min-width: 10ch;
+  max-width: 15ch;
+  flex: 1;
+}
+
+.image-form-field {
+  min-width: 0;
+  padding-bottom: 1rem;
+  width: fit-content;
+}
+
+.image-form-field button {
+  flex: auto;
+  position: relative;
+  min-width: 0;
+  max-width: 150px;
+  max-height: 35px;
+}
+
+.price-form-field input::-webkit-outer-spin-button,
+.price-form-field input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.price-form-field input {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: 0 !important;
 }
 
 .image-preview {
@@ -16,5 +66,11 @@ input[type="file"] {
 }
 
 .image-preview img {
+  display: block;
   height: 100%;
+  margin: 0 auto;
+}
+
+.description-form-field {
+  width: 100%;
 }

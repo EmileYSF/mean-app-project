@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
         let sb = this.snackBar.open(error.error.message, null, {
-          duration: 100000,
+          duration: 5000,
           panelClass: ['snackBarError'],
         });
         return throwError(error);

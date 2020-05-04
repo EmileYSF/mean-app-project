@@ -12,6 +12,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: auto;
 }
 
+.snackBarSuccess {
+    color: greenyellow;
+    text-align: center;
+}
+
+.snackBarSuccess span {
+    margin: auto;
+}
+
 .mat-snack-bar-container {
     min-width: 100px !important;
 }
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: 0 !important;
+    margin-left: 2px;
+}  

@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <div>
+    <a routerLink="">MyApp !</a>
+  </div>
+  <ul>
+    <li *ngIf="userIsAuthentificated">
+      <a mat-button routerLink="/create" routerLinkActive="mat-accent"
+        >New Product</a
+      >
+    </li>
+    <li *ngIf="userIsAuthentificated">
+      <a mat-button routerLink="/cart" routerLinkActive="mat-accent">
+        Checkout
+        <mat-icon
+          [matBadge]="cartSize > 0 ? cartSize : null"
+          matBadgeColor="warn"
+          matBadgeSize="small"
+          >shopping_cart</mat-icon
+        >
+      </a>
+    </li>
+    <li *ngIf="!userIsAuthentificated">
+      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+    </li>
+    <li *ngIf="!userIsAuthentificated">
+      <a mat-stroked-button routerLink="/signup" routerLinkActive="mat-accent"
+        >Signup</a
+      >
+    </li>
+    <li *ngIf="userIsAuthentificated">
+      <button mat-stroked-button (click)="onLogout()">
+        Logout
+      </button>
+    </li>
+  </ul>
+</mat-toolbar>

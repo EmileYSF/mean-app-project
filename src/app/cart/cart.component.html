@@ -1,0 +1,14 @@
+<h1>Cart</h1>
+<mat-list dense>
+  <mat-list-item *ngFor="let item of items">
+    <img matListAvatar [src]="item.imagePath" [alt]="item.title" />
+    <p matLine>
+      <span class="demo-2"> {{ item.title }} </span>
+    </p>
+    <mat-action-list>
+      <button mat-list-item (click)="addItem()"><mat-icon color="primary">add</mat-icon></button>
+      <button mat-list-item (click)="removeItem()"><mat-icon color="primary">remove</mat-icon></button>
+      <button mat-list-item (click)="deleteItem()"><mat-icon color="warn">delete</mat-icon></button>
+    </mat-action-list>
+  </mat-list-item>
+</mat-list>

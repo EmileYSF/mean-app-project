@@ -1,36 +1,66 @@
+<h1>Add a product</h1>
 <mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form [formGroup]="form" (submit)="onRegisterProduct()" *ngIf="!isLoading">
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        formControlName="title"
-        placeholder="Product title"
-      />
-      <mat-error *ngIf="form.get('title').invalid">Enter a title</mat-error>
-    </mat-form-field>
-    <div>
+  <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+  <form [formGroup]="form" (submit)="onRegisterProduct()">
+    <div class="head-form">
+      <mat-form-field class="title-form-field" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="Enter your product title"
+        />
+        <mat-error *ngIf="form.get('title').invalid"
+          >Enter a title of 3 characters minimum</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="price-form-field" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input
+          matInput
+          type="number"
+          onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 190 ||
+        event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+          pattern="[^a-zA-Z]+"
+          formControlName="price"
+        />
+        <span matSuffix>€&nbsp;</span>
+        <mat-error *ngIf="form.get('price').invalid">e.g. 123.99</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="image-form-field">
       <button mat-stroked-button type="button" (click)="productImage.click()">
         Pick product image
       </button>
-      <input type="file" #productImage (change)="onImageUpload($event)"/>
+      <input type="file" #productImage (change)="onImageUpload($event)" />
+      <div
+        class="image-preview"
+        *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+      >
+        <img [src]="imagePreview" [alt]="form.value.title" />
+      </div>
     </div>
-    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
-      <img [src]="imagePreview" [alt]="form.value.title">
-    </div>
-    <mat-form-field>
+
+    <mat-form-field class="description-form-field" appearance="outline">
+      <mat-label>Description</mat-label>
       <textarea
         matInput
         rows="6"
         formControlName="description"
-        placeholder="Describe your product"
+        placeholder="Enter product's description"
       ></textarea>
       <mat-error *ngIf="form.get('description').invalid"
         >Enter a description</mat-error
       >
     </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">
+    <button mat-raised-button color="accent" type="submit" *ngIf="form.valid">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <span *ngIf="!isLoading">
+        Register product
+      </span>
+    </button>
+    <button mat-raised-button *ngIf="form.invalid" disabled>
       Register product
     </button>
   </form>

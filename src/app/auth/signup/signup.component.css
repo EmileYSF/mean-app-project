@@ -1,8 +1,8 @@
 mat-form-field {
-    width: 100%;
-  }
-  
-  mat-spinner {
-    margin: auto;
-  }
-  
+  width: 100%;
+}
+
+mat-spinner {
+  zoom: 0.3;
+  margin: auto;
+}

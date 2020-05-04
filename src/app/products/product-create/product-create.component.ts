@@ -38,6 +38,12 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)],
       }),
+      price: new FormControl(null, {
+        validators: [
+          Validators.required,
+          Validators.pattern('[1-9]{1}[0-9]{0,5}(.[0-9]{1,2})?'),
+        ],
+      }),
       description: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, {
         validators: [Validators.required],
@@ -59,6 +65,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
               description: responseData.description,
               imagePath: responseData.imagePath,
               userId: responseData.userId,
+              price: 0,
             };
             this.form.setValue({
               title: this.product.title,

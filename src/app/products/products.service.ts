@@ -96,6 +96,7 @@ export class ProductsService {
         description: description,
         imagePath: image,
         userId: null,
+        price: 0,
       };
     }
     this.httpClient

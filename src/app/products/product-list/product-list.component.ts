@@ -5,6 +5,8 @@ import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { PageEvent } from '@angular/material/paginator';
 import { AuthService } from 'src/app/auth/auth.service';
+import { CartService } from 'src/app/cart/cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +17,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   isLoading = false;
   totalProducts = 0;
-  productsPerPage = 2;
+  productsPerPage = 6;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   userIsAuthentificated = false;
@@ -25,7 +27,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   constructor(
     public productsService: ProductsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +51,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.userIsAuthentificated = isAuthentificated;
         this.userId = this.authService.getUserId();
       });
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    this.snackBar.open("Product added to your cart", null, {
+      duration: 2000,
+      panelClass: ['snackBarSuccess']
+    })
   }
 
   onChangedPage(pageData: PageEvent) {
