@@ -62,10 +62,10 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
             this.product = {
               id: responseData._id,
               title: responseData.title,
+              price: responseData.price,
               description: responseData.description,
               imagePath: responseData.imagePath,
               userId: responseData.userId,
-              price: 0,
             };
             this.form.setValue({
               title: this.product.title,
@@ -107,6 +107,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
     if (this.path === 'create') {
       this.productsService.addProduct(
         this.form.value.title,
+        this.form.value.price,
         this.form.value.description,
         this.form.value.image
       );
@@ -114,6 +115,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       this.productsService.updateProduct(
         this.productId,
         this.form.value.title,
+        this.form.value.price,
         this.form.value.description,
         this.form.value.image
       );

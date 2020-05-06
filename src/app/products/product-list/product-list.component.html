@@ -3,35 +3,30 @@
 <div class="product-deck-container" *ngIf="products.length > 0 && !isLoading">
   <mat-card class="product-item" *ngFor="let product of products">
     <mat-card-header>
-      <mat-card-title>{{ product.title }}</mat-card-title>
+      <div class="product-title">
+        <mat-card-title>{{ product.title }}</mat-card-title>
+      </div>
+      <div class="product-price">{{ product.price ? product.price : 0 }} €</div>
     </mat-card-header>
     <img mat-card-image [src]="product.imagePath" [alt]="product.title" />
     <mat-card-content>
-      <p>{{ product.description }}</p>
+      <div class="product-description">{{ product.description }}</div>
     </mat-card-content>
-    <mat-card-actions
-      class="product-action-bar"
-      *ngIf="userIsAuthentificated && userId == product.userId"
-    >
+    <mat-card-actions class="product-action-bar" *ngIf="userIsAuthentificated && userId == product.userId">
       <button mat-flat-button color="accent" (click)="addToCart(product)">
         ADD
       </button>
-      <button mat-stroked-button color="accent" [routerLink]="['/edit', product.id]"
-        >EDIT</button
-      >
+      <button mat-stroked-button color="accent" [routerLink]="['/edit', product.id]">
+        EDIT
+      </button>
       <button mat-flat-button color="warn" (click)="onDelete(product.id)">
         DELETE
       </button>
     </mat-card-actions>
   </mat-card>
 </div>
-<mat-paginator
-  [length]="totalProducts"
-  [pageSize]="productsPerPage"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="onChangedPage($event)"
-  *ngIf="products.length > 0"
-></mat-paginator>
+<mat-paginator style="background-color: #fafafa;" [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)" *ngIf="products.length > 0"></mat-paginator>
 <p class="info-text mat-body-1" *ngIf="products.length <= 0 && !isLoading">
   No products added yet!
 </p>

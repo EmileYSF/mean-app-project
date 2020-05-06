@@ -32,6 +32,7 @@ export class ProductsService {
               return {
                 id: product._id,
                 title: product.title,
+                price: product.price,
                 description: product.description,
                 imagePath: product.imagePath,
                 userId: product.user_id,
@@ -54,6 +55,7 @@ export class ProductsService {
     return this.httpClient.get<{
       _id: string;
       title: string;
+      price: string;
       description: string;
       imagePath: string;
       userId: string;
@@ -64,9 +66,10 @@ export class ProductsService {
     return this.productsUpdated.asObservable();
   }
 
-  addProduct(title: string, description: string, image: File) {
+  addProduct(title: string, price: string, description: string, image: File) {
     const productData = new FormData();
     productData.append('title', title);
+    productData.append('price', price);
     productData.append('description', description);
     productData.append('image', image, title);
     this.httpClient
@@ -79,6 +82,7 @@ export class ProductsService {
   updateProduct(
     id: string,
     title: string,
+    price: string,
     description: string,
     image: string | File
   ) {
@@ -87,16 +91,17 @@ export class ProductsService {
       productData = new FormData();
       productData.append('id', id);
       productData.append('title', title);
+      productData.append('price', price);
       productData.append('description', description);
       productData.append('image', image, title);
     } else {
       productData = {
         id: id,
         title: title,
+        price: price,
         description: description,
         imagePath: image,
         userId: null,
-        price: 0,
       };
     }
     this.httpClient

@@ -27,28 +27,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((isAuthentificated) => {
         this.userIsAuthentificated = isAuthentificated;
       });
-    const prod: Product[] = [
-      {
-        id: 'tete',
-        title: 'tata',
-        description: 'cososoo',
-        imagePath: 'http://localhost:3000/images/bbbbbb-1587900192426.jpg',
-        userId: 'idunno',
-        price: 5
-      },
-      {
-        id: 'tete',
-        title: 'tata',
-        description: 'cososoo',
-        imagePath: 'http://localhost:3000/images/bbbbbb-1587900192426.jpg',
-        userId: 'idunno',
-        price: 5
-      },
-    ];
+    // const prod: Product[] = [
+    //   {
+    //     id: 'tete',
+    //     title: 'tata',
+    //     description: 'cososoo',
+    //     imagePath: 'http://localhost:3000/images/bbbbbb-1587900192426.jpg',
+    //     userId: 'idunno',
+    //     price: '5'
+    //   },
+    //   {
+    //     id: 'tete',
+    //     title: 'tata',
+    //     description: 'cososoo',
+    //     imagePath: 'http://localhost:3000/images/bbbbbb-1587900192426.jpg',
+    //     userId: 'idunno',
+    //     price: '5'
+    //   },
+    // ];
 
-    for (const p of prod) {
-      // this.cartService.addToCart(p);
-    }
+    // for (const p of prod) {
+    //   // this.cartService.addToCart(p);
+    // }
 
     this.cartSizeSubscription = this.cartService
       .getItemsSizeListener()

@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private cartService: CartService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true;

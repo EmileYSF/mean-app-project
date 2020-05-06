@@ -45,6 +45,7 @@ router.post(
     const userId = new objectId(req.userTokenData.userId);
     const product = {
       title: req.body.title,
+      price: req.body.price,
       description: req.body.description,
       imagePath: url + "/images/" + req.file.filename,
       user_id: userId,
@@ -79,6 +80,7 @@ router.put(
     const product = {
       _id: id,
       title: req.body.title,
+      price: req.body.price,
       description: req.body.description,
       imagePath: imagePath,
       userId: req.userTokenData.userId
