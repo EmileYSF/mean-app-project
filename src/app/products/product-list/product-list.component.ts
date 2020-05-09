@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgModule } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Product } from '../product.model';
@@ -7,6 +7,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CartService } from 'src/app/cart/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatChipSelectionChange } from '@angular/material/chips';
 
 @Component({
   selector: 'app-product-list',
@@ -24,6 +25,53 @@ export class ProductListComponent implements OnInit, OnDestroy {
   userId: string;
   private productsSubscription: Subscription;
   private authStatusSubscription: Subscription;
+  orderQuery = "";
+  categoryQueries: string[] = [];
+  productCategories: { name: string, options: {value: string, state: boolean}[] }[] = [
+    {
+      name: "Vehicles",
+      options: [
+        {
+          value: "Cars",
+          state: false
+        },
+        {
+          value: "Motos",
+          state: false
+        }
+      ]
+    },
+    {
+      name: "Fashion",
+      options: [
+        {
+          value: "Clothes",
+          state: false
+        },
+        {
+          value: "Shoes",
+          state: false
+        },
+        {
+          value: "Jewels",
+          state: false
+        },
+        {
+          value: "Accessories",
+          state: false
+        }
+      ]
+    },
+    {
+      name: "Various",
+      options: [
+        {
+          value: "Others",
+          state: false
+        }
+      ]
+    }
+  ];
 
   constructor(
     public productsService: ProductsService,
@@ -75,6 +123,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }, () => {
       this.isLoading = false;
     });
+  }
+
+  onFilterChange(event: MatChipSelectionChange, value: string) {
+    var index;
+    if (!event.selected && this.categoryQueries.includes(value)) {
+      index = this.categoryQueries.findIndex(v => v === value);
+      this.categoryQueries.splice(index, 1);
+    } else if (event.selected && !this.categoryQueries.includes(value)) {
+      this.categoryQueries.push(value);
+    }
   }
 
   ngOnDestroy(): void {

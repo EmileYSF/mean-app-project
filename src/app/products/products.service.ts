@@ -17,7 +17,7 @@ export class ProductsService {
     productsCount: number;
   }>();
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   getProducts(productPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${productPerPage}&page=${currentPage}`;
@@ -32,6 +32,7 @@ export class ProductsService {
               return {
                 id: product._id,
                 title: product.title,
+                category: product.category,
                 price: product.price,
                 description: product.description,
                 imagePath: product.imagePath,
@@ -55,7 +56,8 @@ export class ProductsService {
     return this.httpClient.get<{
       _id: string;
       title: string;
-      price: string;
+      price: number;
+      category: string;
       description: string;
       imagePath: string;
       userId: string;
@@ -66,10 +68,11 @@ export class ProductsService {
     return this.productsUpdated.asObservable();
   }
 
-  addProduct(title: string, price: string, description: string, image: File) {
+  addProduct(title: string, category: string, price: number, description: string, image: File) {
     const productData = new FormData();
     productData.append('title', title);
-    productData.append('price', price);
+    productData.append('category', category);
+    productData.append('price', price.toString());
     productData.append('description', description);
     productData.append('image', image, title);
     this.httpClient
@@ -82,7 +85,8 @@ export class ProductsService {
   updateProduct(
     id: string,
     title: string,
-    price: string,
+    category: string,
+    price: number,
     description: string,
     image: string | File
   ) {
@@ -91,7 +95,8 @@ export class ProductsService {
       productData = new FormData();
       productData.append('id', id);
       productData.append('title', title);
-      productData.append('price', price);
+      productData.append('category', category);
+      productData.append('price', price.toString());
       productData.append('description', description);
       productData.append('image', image, title);
     } else {
@@ -99,6 +104,7 @@ export class ProductsService {
         id: id,
         title: title,
         price: price,
+        category: category,
         description: description,
         imagePath: image,
         userId: null,

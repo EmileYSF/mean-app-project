@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -18,6 +18,30 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
+  productCategories: { name: string, values: string[] }[] = [
+    {
+      name: "Vehicles",
+      values: [
+        "Cars",
+        "Motos"
+      ]
+    },
+    {
+      name: "Fashion",
+      values: [
+        "Clothes",
+        "Shoes",
+        "Jewels",
+        "Accessorieeeeeeees"
+      ]
+    },
+    {
+      name: "Various",
+      values: [
+        "Others",
+      ]
+    }
+  ];
   private path = 'create';
   private productId: string;
   private authStatusSubscription: Subscription;
@@ -26,9 +50,9 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
     public productsService: ProductsService,
     public route: ActivatedRoute,
     private authService: AuthService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.authStatusSubscription = this.authService
       .getAuthStatusListener()
       .subscribe((authStatus) => {
@@ -38,13 +62,14 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)],
       }),
+      category: new FormControl(null, { validators: [Validators.required] }),
       price: new FormControl(null, {
         validators: [
           Validators.required,
           Validators.pattern('[1-9]{1}[0-9]{0,5}(.[0-9]{1,2})?'),
         ],
       }),
-      description: new FormControl(null, { validators: [Validators.required] }),
+      description: new FormControl(null, { validators: [Validators.required, Validators.maxLength(1024)] }),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
@@ -63,12 +88,15 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
               id: responseData._id,
               title: responseData.title,
               price: responseData.price,
+              category: responseData.category,
               description: responseData.description,
               imagePath: responseData.imagePath,
               userId: responseData.userId,
             };
             this.form.setValue({
               title: this.product.title,
+              category: responseData.category,
+              price: this.product.price,
               description: this.product.description,
               image: this.product.imagePath,
             });
@@ -90,9 +118,9 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       let error = this.form.get('image').getError('invalidMimeType');
       if (error) {
         console.log(
-          'ERROR: ce type de fichier (' +
-            this.form.get('image').getError('type') +
-            ") n'est pas pris en charge!"
+          'ERROR: This type of file (' +
+          this.form.get('image').getError('type') +
+          ") is not an image!"
         );
       }
     };
@@ -107,6 +135,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
     if (this.path === 'create') {
       this.productsService.addProduct(
         this.form.value.title,
+        this.form.value.category,
         this.form.value.price,
         this.form.value.description,
         this.form.value.image
@@ -115,6 +144,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       this.productsService.updateProduct(
         this.productId,
         this.form.value.title,
+        this.form.value.category,
         this.form.value.price,
         this.form.value.description,
         this.form.value.image

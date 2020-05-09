@@ -14,46 +14,49 @@ input[type="file"] {
 .head-form {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: space-between;
 }
 
-.title-form-field {
+.form-field-title {
   min-width: 25ch;
   max-width: 50ch;
   flex: 1;
 }
-.title-form-field input {
-  max-width: 100%;
+
+.form-field-category {
+  min-width: 15ch;
+  max-width: 30ch;
+  flex: 1;
 }
-.price-form-field {
+
+.form-field-price {
   min-width: 10ch;
   max-width: 15ch;
   flex: 1;
 }
 
-.image-form-field {
+.form-field-price input {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.form-field-image {
   min-width: 0;
   padding-bottom: 1rem;
   width: fit-content;
 }
 
-.image-form-field button {
+.form-field-image button {
   flex: auto;
-  position: relative;
   min-width: 0;
   max-width: 150px;
   max-height: 35px;
 }
 
-.price-form-field input::-webkit-outer-spin-button,
-.price-form-field input::-webkit-inner-spin-button {
+.form-field-price input::-webkit-outer-spin-button,
+.form-field-price input::-webkit-inner-spin-button {
   display: none;
-}
-
-.price-form-field input {
-  text-align: right;
-  padding-right: 1rem;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-suffix {
@@ -71,6 +74,6 @@ input[type="file"] {
   margin: 0 auto;
 }
 
-.description-form-field {
+.form-field-description {
   width: 100%;
 }

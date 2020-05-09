@@ -1,7 +1,17 @@
 <h1>Products list</h1>
 <mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-form-field>
+  <input matInput type="text" [(ngModel)]="orderQuery">
+</mat-form-field>
+<mat-chip-list aria-label="Category filter" #categoryFilters multiple>
+  <ng-container *ngFor="let category of productCategories">
+    <mat-chip *ngFor="let option of category.options" [value]="option.value" color="accent"
+      (click)="option.state=!option.state" [selected]="option.state"
+      (selectionChange)="onFilterChange($event, option.value)">{{ option.value }}</mat-chip>
+  </ng-container>
+</mat-chip-list>
 <div class="product-deck-container" *ngIf="products.length > 0 && !isLoading">
-  <mat-card class="product-item" *ngFor="let product of products">
+  <mat-card class="product-item" *ngFor="let product of products | filter: categoryFilters.selected | orderBy: orderQuery">
     <mat-card-header>
       <div class="product-title">
         <mat-card-title>{{ product.title }}</mat-card-title>
@@ -12,21 +22,21 @@
     <mat-card-content>
       <div class="product-description">{{ product.description }}</div>
     </mat-card-content>
-    <mat-card-actions class="product-action-bar" *ngIf="userIsAuthentificated && userId == product.userId">
-      <button mat-flat-button color="accent" (click)="addToCart(product)">
+    <mat-card-actions class="product-action-bar" *ngIf="userIsAuthentificated ">
+      <button mat-button color="primary" (click)="addToCart(product)">
         ADD
       </button>
-      <button mat-stroked-button color="accent" [routerLink]="['/edit', product.id]">
+      <button mat-button [routerLink]="['/edit', product.id]" *ngIf="userId == product.userId">
         EDIT
       </button>
-      <button mat-flat-button color="warn" (click)="onDelete(product.id)">
+      <button mat-stroked-button color="warn" (click)="onDelete(product.id)">
         DELETE
       </button>
     </mat-card-actions>
   </mat-card>
 </div>
-<mat-paginator style="background-color: #fafafa;" [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions"
-  (page)="onChangedPage($event)" *ngIf="products.length > 0"></mat-paginator>
+<mat-paginator style="background-color: #fafafa;" [length]="totalProducts" [pageSize]="productsPerPage"
+  [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="products.length > 0"></mat-paginator>
 <p class="info-text mat-body-1" *ngIf="products.length <= 0 && !isLoading">
   No products added yet!
 </p>

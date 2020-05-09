@@ -7,12 +7,16 @@ mat-spinner {
   margin: auto;
 }
 
+mat-chip::after {
+  background: none !important;
+}
+
 mat-paginator {
   margin-top: 1rem;
 }
 
 mat-card img {
-  height: 30vh;
+  height: 15em;
   object-fit: cover;
 }
 
@@ -21,29 +25,31 @@ mat-card-actions {
 }
 
 .product-deck-container {
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 0.8fr));
+  grid-template-rows: auto;
+  gap: 1rem;
+  justify-content: center;
   width: 100%;
   margin-top: 1rem;
 }
 
 .product-item {
-  flex: 1;
-  -webkit-box-flex: 1;
-  -ms-box-flex: 1;
-  -moz-box-flex: 1;
   padding: 1rem 1rem 1rem 1rem;
-  margin: 0.5rem;
-  max-width: 300px;
-  min-width: 210px;
+  max-height: 400px;
 }
 
 .product-title {
   margin-left: -36px;
   overflow: hidden;
+  text-overflow: ellipsis;
   flex: 1;
 }
-
+.product-title > *{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .product-price {
   margin-bottom: 12px;
   color: coral;
@@ -54,6 +60,12 @@ mat-card-actions {
 }
 
 .product-description {
-  height: 60px;
+  line-height: 1.2rem;
+  max-height: 3.6rem;
+  text-align: justify;
+  
+  display: -webkit-box;
   overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
 }
