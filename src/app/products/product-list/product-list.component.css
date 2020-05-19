@@ -7,6 +7,10 @@ mat-spinner {
   margin: auto;
 }
 
+mat-chip:hover {
+  background-color: #ffd740;
+}
+
 mat-chip::after {
   background: none !important;
 }
@@ -22,6 +26,20 @@ mat-card img {
 
 mat-card-actions {
   padding-top: 0;
+}
+
+.list-filter {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.list-filter span {
+  margin-right: 1rem;
+  flex: max-content 0;
+}
+.list-filter mat-chip-list {
+  flex: 1 1 auto;
 }
 
 .product-deck-container {

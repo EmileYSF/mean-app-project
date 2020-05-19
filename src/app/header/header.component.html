@@ -3,6 +3,31 @@
     <a routerLink="">MyApp !</a>
   </div>
   <ul>
+    <div class="search-input">
+      <input
+        matInput
+        type="text"
+        placeholder="Search a product"
+        [formControl]="searchQuery"
+        [matAutocomplete]="auto"
+      />
+      <mat-icon aria-hidden>search</mat-icon>
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let product of searchedProduct | async"
+          [value]="product.title"
+        >
+          <img
+            aria-hidden
+            class="search-img"
+            [src]="product.imagePath"
+            height="30"
+          />
+          <span>{{ product.title }}</span> |
+          <small>{{ product.price }}€</small>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
     <li *ngIf="userIsAuthentificated">
       <a mat-button routerLink="/create" routerLinkActive="mat-accent"
         >New Product</a

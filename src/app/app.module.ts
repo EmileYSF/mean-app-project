@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -24,6 +25,7 @@ import { CartComponent } from './cart/cart.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     AuthModule,
     ProductsModule,
     AngularMaterialModule

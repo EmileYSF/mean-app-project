@@ -1,8 +1,6 @@
+import { Product } from '../products/product.model';
+
 export interface Cart {
-    productId: string;
-    userId: string;
-    title: string;
-    imagePath: string;
-    price: number;
+    product: Product;
     count: number;
 }

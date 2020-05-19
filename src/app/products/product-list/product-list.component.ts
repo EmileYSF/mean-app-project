@@ -16,7 +16,7 @@ import { MatChipSelectionChange } from '@angular/material/chips';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
-  isLoading = false;
+  isLoading: boolean = false;
   totalProducts = 0;
   productsPerPage = 6;
   currentPage = 1;
@@ -25,7 +25,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   userId: string;
   private productsSubscription: Subscription;
   private authStatusSubscription: Subscription;
-  orderQuery = "";
+  orderQuery = "a";
+  orderList: string[] = [ "title", "price" ];
   categoryQueries: string[] = [];
   productCategories: { name: string, options: {value: string, state: boolean}[] }[] = [
     {
@@ -125,14 +126,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onFilterChange(event: MatChipSelectionChange, value: string) {
-    var index;
-    if (!event.selected && this.categoryQueries.includes(value)) {
-      index = this.categoryQueries.findIndex(v => v === value);
-      this.categoryQueries.splice(index, 1);
-    } else if (event.selected && !this.categoryQueries.includes(value)) {
-      this.categoryQueries.push(value);
-    }
+  onOrderChange(order: string) {
+    this.orderQuery = order;
   }
 
   ngOnDestroy(): void {

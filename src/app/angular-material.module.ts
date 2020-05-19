@@ -12,6 +12,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   exports: [
@@ -27,7 +28,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatBadgeModule,
     MatMenuModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatAutocompleteModule
   ],
 })
 export class AngularMaterialModule { }

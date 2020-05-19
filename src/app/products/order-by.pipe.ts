@@ -9,7 +9,6 @@ export class OrderByPipe implements PipeTransform {
   transform(items: Product[], orderQuery: string): Product[] {
     if (!items) return [];
     if (orderQuery !== "title" && orderQuery !== "price") return items;
-    console.log(orderQuery);
     const item = items[0];
 
     if (orderQuery === "price") {

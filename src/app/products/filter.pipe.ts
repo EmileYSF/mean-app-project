@@ -9,7 +9,7 @@ export class FilterPipe implements PipeTransform {
   transform(items: Product[], filterQueries: any): Product[] {
     if (!items) return [];
     if (filterQueries.length === 0) return items;
-
+    
     const filters = [];
     for (const filter of filterQueries) {
       filters.push(filter.value.toLowerCase());

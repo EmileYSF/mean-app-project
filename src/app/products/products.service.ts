@@ -118,6 +118,6 @@ export class ProductsService {
   }
 
   deleteProduct(productId: string) {
-    return this.httpClient.delete(this.productURL + '/' + productId);
+    return this.httpClient.delete(this.productURL + '/' + productId);    
   }
 }
